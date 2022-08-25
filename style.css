@@ -1,0 +1,94 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    max-width: 1920px;
+    height: 100vh;
+    background-color: black;
+    margin: 0 auto;
+    border: 1px solid red;
+    overflow: hidden;
+}
+
+.wrapper {
+    width: min(100% - 0rem);
+    position: relative;
+    top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+/* ancients cards */
+
+.block1 {
+    width: 100%;
+    height: 1150px;
+    background: white;
+    margin-right: 25px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ancient-card {
+    width: 200px;
+    height: 360px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 10px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.active {
+    border: 1px solid red;
+}
+
+/* difficulty level */
+
+.block2 {
+    width: 100%;
+    height: 1150px;
+    background: white;
+    border-radius: 10px;
+    margin: 0 25px;
+}
+
+.level-text {
+    font-size: 3rem;
+    font-family: Roboto;
+    color: black;
+}
+
+.level {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    width: 250px;
+    height: 100px;
+    background-color: rgba(233, 12, 2, 0.4);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* deck generator */
+
+.block3 {
+    width: 100%;
+    height: 1150px;
+    background: white;
+    margin-left: 25px;
+    border-radius: 10px;
+}
+
+.card-headline {
+    font-size: 3rem;
+    font-family: Roboto;
+}
+
+
