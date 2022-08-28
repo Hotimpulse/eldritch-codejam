@@ -3,9 +3,11 @@
 selectDeck1();
 
 function selectDeck1() {
+    const mediumLevel = document.querySelector('.medium')
     document.querySelectorAll('.ancient-card').forEach((ancients) => {
         ancients.addEventListener('click', function(e) {
             e.target.classList.toggle("active");
+            mediumLevel.classList.toggle('hidden');
         })
     })
 }
@@ -61,6 +63,12 @@ let randomNum;
 let green1 = document.querySelector('.green1');
 let brown1 = document.querySelector('.brown1');
 let blue1 = document.querySelector('.blue1');
+let green2 = document.querySelector('.green2');
+let brown2 = document.querySelector('.brown2');
+let blue2 = document.querySelector('.blue2');
+let green3 = document.querySelector('.green3');
+let brown3 = document.querySelector('.brown3');
+let blue3 = document.querySelector('.blue3');
 
 function getRandomNum(min, max) {
   min = Math.ceil(min);
@@ -73,29 +81,14 @@ function changeLastCard() {
     let greenNum = getRandomNum(1, 19);
     let blueNum = getRandomNum(1, 13);
     let brownNum = getRandomNum(1, 21);
-    let img = new Image();
-    img.src = cardsDataGreen[greenNum];
-    img.onload = () => {
-        lastCard.style.backgroundImage =
-        "url('./assets/MythicCards/green/green" +
-        greenNum +
-        ".png')";
-    };
+    let fullDeck = getRandomNum(1, 51);
+    let randomCardArray = cardsDataBlue.concat(cardsDataGreen, cardsDataBrown);
+    backCard.addEventListener('click', () => {
+        lastCard.classList.remove('hidden');
+        lastCard.style.backgroundImage = `url(${randomCardArray[fullDeck].cardFace})`
+        // "url('./assets/MythicCards/green/green" + randomCardArray[fullDeck] + ".png')";
+    })
 };
-
-function getNewCard() {
-    green1.textContent = 1;
-    brown1.textContent = 2;
-    blue1.textContent = 1;
-    backCard.addEventListener('click', getNewCard);
-    changeLastCard();
-}
-getNewCard();
-
-let arrayStage1 = [cardsDataGreen[greenNum] + cardsDataBrown[brownNum] + cardsDataBlue[blueNum]]; // 
-let arrayStage2 = [];
-let arrayStage3 = [];
-
 
 // arrays
 
@@ -419,3 +412,32 @@ const cardsDataBrown = [
       color:'brown'
     },
   ]
+
+
+function getNewCard() {
+    green1.textContent = 1;
+    green1.style.color = "white";
+    brown1.textContent = 2;
+    brown1.style.color = "white";
+    blue1.textContent = 1;
+    blue1.style.color = "white";
+    green2.textContent = 2;
+    green2.style.color = "white";
+    brown2.textContent = 5;
+    brown2.style.color = "white";
+    blue2.textContent = 1;
+    blue2.style.color = "white";
+    green3.textContent = 2;
+    green3.style.color = "white";
+    brown3.textContent = 4;
+    brown3.style.color = "white";
+    blue3.textContent = 0;
+    blue3.style.color = "white";
+
+    backCard.addEventListener('click', getNewCard);
+    changeLastCard();
+}
+getNewCard();
+
+const ultimateArray = cardsDataBlue.concat(cardsDataBrown, cardsDataGreen);
+console.log(ultimateArray);
