@@ -1,4 +1,4 @@
-import Ancients from '../assets/Ancients/index'
+// import Ancients from '../assets/Ancients/index'
 
 const ancientsData = [
   {
@@ -83,4 +83,4 @@ const ancientsData = [
   },
 ]
 
-export default ancientsData
+// export default ancientsData
