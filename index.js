@@ -1,20 +1,4 @@
 // select ancient card
-
-selectDeck1();
-
-function selectDeck1() {
-    const mediumLevel = document.querySelector('.medium')
-    document.querySelectorAll('.ancient-card').forEach((ancients) => {
-        ancients.addEventListener('click', function(e) {
-            e.target.classList.toggle("active");
-            mediumLevel.classList.toggle('hidden');
-        })
-    })
-}
-
-// select difficulty level
-changeLevelColor();
-
 const diff1 = document.querySelector('.very-easy');
 const diff2 = document.querySelector('.easy');
 const diff3 = document.querySelector('.medium');
@@ -23,72 +7,120 @@ const diff5 = document.querySelector('.hard');
 const backCard = document.querySelector('.deck');
 const currentState = document.querySelector('.current-state');
 const lastCard = document.querySelector('.last-card');
+//generate deck
+let randomNum;
+let greenCount1 = document.querySelector('.green1');
+let brownCount1 = document.querySelector('.brown1');
+let blueCount1 = document.querySelector('.blue1');
+let greenCount2 = document.querySelector('.green2');
+let brownCount2 = document.querySelector('.brown2');
+let blueCount2 = document.querySelector('.blue2');
+let greenCount3 = document.querySelector('.green3');
+let brownCount3 = document.querySelector('.brown3');
+let blueCount3 = document.querySelector('.blue3');
 
-function changeLevelColor() {
-    const diff1 = document.querySelector('.very-easy');
-    const diff2 = document.querySelector('.easy');
-    const diff3 = document.querySelector('.medium');
-    const diff4 = document.querySelector('.difficult');
-    const diff5 = document.querySelector('.hard');
 
-    // diff1.addEventListener('click', () => {
-    //     diff1.classList.toggle('active');
-    //     currentState.classList.toggle('hidden');
-    //     backCard.classList.remove('hidden');
-    // })
-    // diff2.addEventListener('click', () => {
-    //     diff2.classList.toggle('active');
-    //     currentState.classList.toggle('hidden');
-    //     backCard.classList.remove('hidden');
-    // })
+
+function selectDeck() {
+    document.querySelectorAll('.ancient-card').forEach((ancients) => {
+        ancients.addEventListener('click', function(e) {
+            e.target.classList.toggle("active");
+            diff1.classList.toggle('hidden');
+            diff2.classList.toggle('hidden');
+            diff3.classList.toggle('hidden');
+            diff4.classList.toggle('hidden');
+            diff5.classList.toggle('hidden');
+        })
+    })
+}
+selectDeck();
+
+// select ancients
+
+const ancient1 = document.querySelector('.item1');
+const ancient2 = document.querySelector('.item2');
+const ancient3 = document.querySelector('.item3');
+const ancient4 = document.querySelector('.item4');
+
+function setLevel () {
+    ancient1.addEventListener('click', () => {
+        greenCount1.textContent = 1;
+        brownCount1.textContent = 2;
+        blueCount1.textContent = 1;
+        greenCount2.textContent = 2;
+        brownCount2.textContent = 3;
+        blueCount2.textContent = 1;
+        greenCount3.textContent = 2;
+        brownCount3.textContent = 4;
+        blueCount3.textContent = 0;
+    });
+    ancient2.addEventListener('click', () => {
+        greenCount1.textContent = 0;
+        brownCount1.textContent = 2;
+        blueCount1.textContent = 2;
+        greenCount2.textContent = 1;
+        brownCount2.textContent = 3;
+        blueCount2.textContent = 0;
+        greenCount3.textContent = 3;
+        brownCount3.textContent = 4;
+        blueCount3.textContent = 0;
+    });
+    ancient3.addEventListener('click', () => {
+        greenCount1.textContent = 0;
+        brownCount1.textContent = 2;
+        blueCount1.textContent = 1;
+        greenCount2.textContent = 2;
+        brownCount2.textContent = 3;
+        blueCount2.textContent = 1;
+        greenCount3.textContent = 3;
+        brownCount3.textContent = 4;
+        blueCount3.textContent = 0;
+    });
+    ancient4.addEventListener('click', () => {
+        greenCount1.textContent = 1;
+        brownCount1.textContent = 2;
+        blueCount1.textContent = 1;
+        greenCount2.textContent = 3;
+        brownCount2.textContent = 2;
+        blueCount2.textContent = 1;
+        greenCount3.textContent = 2;
+        brownCount3.textContent = 4;
+        blueCount3.textContent = 0;
+    });
+};
+setLevel();
+
+// select difficulty level
+
+function changeLevel() {
+    diff1.addEventListener('click', () => {
+        diff1.classList.toggle('active');
+        currentState.classList.toggle('hidden');
+        backCard.classList.remove('hidden');
+    })
+    diff2.addEventListener('click', () => {
+        diff2.classList.toggle('active');
+        currentState.classList.toggle('hidden');
+        backCard.classList.remove('hidden');
+    })
     diff3.addEventListener('click', () => {
         diff3.classList.toggle('active');
         currentState.classList.toggle('hidden');
         backCard.classList.remove('hidden');
     })
-    // diff4.addEventListener('click', () => {
-    //     diff4.classList.toggle('active');
-    //     currentState.classList.toggle('hidden');
-    //     backCard.classList.remove('hidden');
-    // })
-    // diff5.addEventListener('click', () => {
-    //     diff5.classList.toggle('active');
-    //     currentState.classList.toggle('hidden');
-    //     backCard.classList.remove('hidden');
-    // })
-}
-
-//generate deck
-let randomNum;
-let green1 = document.querySelector('.green1');
-let brown1 = document.querySelector('.brown1');
-let blue1 = document.querySelector('.blue1');
-let green2 = document.querySelector('.green2');
-let brown2 = document.querySelector('.brown2');
-let blue2 = document.querySelector('.blue2');
-let green3 = document.querySelector('.green3');
-let brown3 = document.querySelector('.brown3');
-let blue3 = document.querySelector('.blue3');
-
-function getRandomNum(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  randomNum = Math.floor(Math.random() * (max - min)) + min;
-  return randomNum;
-}
-
-function changeLastCard() {
-    let greenNum = getRandomNum(1, 19);
-    let blueNum = getRandomNum(1, 13);
-    let brownNum = getRandomNum(1, 21);
-    let fullDeck = getRandomNum(1, 51);
-    let randomCardArray = cardsDataBlue.concat(cardsDataGreen, cardsDataBrown);
-    backCard.addEventListener('click', () => {
-        lastCard.classList.remove('hidden');
-        lastCard.style.backgroundImage = `url(${randomCardArray[fullDeck].cardFace})`
-        // "url('./assets/MythicCards/green/green" + randomCardArray[fullDeck] + ".png')";
+    diff4.addEventListener('click', () => {
+        diff4.classList.toggle('active');
+        currentState.classList.toggle('hidden');
+        backCard.classList.remove('hidden');
     })
-};
+    diff5.addEventListener('click', () => {
+        diff5.classList.toggle('active');
+        currentState.classList.toggle('hidden');
+        backCard.classList.remove('hidden');
+    })
+}
+changeLevel();
+
 
 // arrays
 
@@ -413,31 +445,73 @@ const cardsDataBrown = [
     },
   ]
 
+//--------------------------randomizer
 
-function getNewCard() {
-    green1.textContent = 1;
-    green1.style.color = "white";
-    brown1.textContent = 2;
-    brown1.style.color = "white";
-    blue1.textContent = 1;
-    blue1.style.color = "white";
-    green2.textContent = 2;
-    green2.style.color = "white";
-    brown2.textContent = 5;
-    brown2.style.color = "white";
-    blue2.textContent = 1;
-    blue2.style.color = "white";
-    green3.textContent = 2;
-    green3.style.color = "white";
-    brown3.textContent = 4;
-    brown3.style.color = "white";
-    blue3.textContent = 0;
-    blue3.style.color = "white";
-
-    backCard.addEventListener('click', getNewCard);
-    changeLastCard();
+function getRandomNum(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    randomNum = Math.floor(Math.random() * (max - min)) + min;
+    return randomNum;
 }
-getNewCard();
 
-const ultimateArray = cardsDataBlue.concat(cardsDataBrown, cardsDataGreen);
-console.log(ultimateArray);
+//--------------------------decks
+greenCount1.style.color = "white";
+brownCount1.style.color = "white";
+blueCount1.style.color = "white";
+greenCount2.style.color = "white";
+brownCount2.style.color = "white";
+blueCount2.style.color = "white";
+greenCount3.style.color = "white";
+brownCount3.style.color = "white";
+blueCount3.style.color = "white";
+let cards = cardsDataBlue.concat(cardsDataGreen, cardsDataBrown);
+const blueCommonHardCards = cards.filter(
+    (card) => card.color === "blue" && card.type !== "easy"
+  );
+
+// const blueCommonHardCards = cards.filter(
+//     (card) => card.color === "blue" && card.type === "easy"
+//   );
+
+
+function changeLastCard() {      
+    let fullDeck = getRandomNum(1, 52);
+    
+    let noGreen = cards.filter(remove => remove.color !== 'green')
+    let noBlue = cards.filter(remove => remove.color !== 'blue') 
+    let noBrown = cards.filter(remove => remove.color !== 'brown')  
+
+    greenCount1.textContent = 1;
+    brownCount1.textContent = 2;
+    blueCount1.textContent = 1;
+    backCard.addEventListener('click', () => {
+        lastCard.classList.remove('hidden');
+        lastCard.style.backgroundImage = `url(${cards[fullDeck].cardFace})`;
+
+        if (lastCard.style.backgroundImage.includes('green') && greenCount1.textContent !== 0) {
+            greenCount1.textContent = greenCount1.textContent - 1;
+        }
+        if (lastCard.style.backgroundImage.includes('blue') && blueCount1.textContent !== 0) {
+            blueCount1.textContent = blueCount1.textContent - 1;
+        }
+        if (lastCard.style.backgroundImage.includes('brown') && brownCount1.textContent !== 0) {
+            brownCount1.textContent = brownCount1.textContent - 1;
+        }
+
+        if (greenCount1.textContent === 0) return noGreen;
+        if (blueCount1.textContent === 0) return noBlue;
+        if (brownCount1.textContent === 0) return noBrown;
+    })
+        
+};
+
+
+//--------------------------shuffles and counters
+
+function getNewCardStage() {
+        backCard.addEventListener('click', () => {
+            getNewCardStage();
+        });
+        changeLastCard();
+}
+getNewCardStage();
