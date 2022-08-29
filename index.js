@@ -18,110 +18,6 @@ let blueCount2 = document.querySelector('.blue2');
 let greenCount3 = document.querySelector('.green3');
 let brownCount3 = document.querySelector('.brown3');
 let blueCount3 = document.querySelector('.blue3');
-
-
-
-function selectDeck() {
-    document.querySelectorAll('.ancient-card').forEach((ancients) => {
-        ancients.addEventListener('click', function(e) {
-            e.target.classList.toggle("active");
-            diff1.classList.toggle('hidden');
-            diff2.classList.toggle('hidden');
-            diff3.classList.toggle('hidden');
-            diff4.classList.toggle('hidden');
-            diff5.classList.toggle('hidden');
-        })
-    })
-}
-selectDeck();
-
-// select ancients
-
-const ancient1 = document.querySelector('.item1');
-const ancient2 = document.querySelector('.item2');
-const ancient3 = document.querySelector('.item3');
-const ancient4 = document.querySelector('.item4');
-
-function setLevel () {
-    ancient1.addEventListener('click', () => {
-        greenCount1.textContent = 1;
-        brownCount1.textContent = 2;
-        blueCount1.textContent = 1;
-        greenCount2.textContent = 2;
-        brownCount2.textContent = 3;
-        blueCount2.textContent = 1;
-        greenCount3.textContent = 2;
-        brownCount3.textContent = 4;
-        blueCount3.textContent = 0;
-    });
-    ancient2.addEventListener('click', () => {
-        greenCount1.textContent = 0;
-        brownCount1.textContent = 2;
-        blueCount1.textContent = 2;
-        greenCount2.textContent = 1;
-        brownCount2.textContent = 3;
-        blueCount2.textContent = 0;
-        greenCount3.textContent = 3;
-        brownCount3.textContent = 4;
-        blueCount3.textContent = 0;
-    });
-    ancient3.addEventListener('click', () => {
-        greenCount1.textContent = 0;
-        brownCount1.textContent = 2;
-        blueCount1.textContent = 1;
-        greenCount2.textContent = 2;
-        brownCount2.textContent = 3;
-        blueCount2.textContent = 1;
-        greenCount3.textContent = 3;
-        brownCount3.textContent = 4;
-        blueCount3.textContent = 0;
-    });
-    ancient4.addEventListener('click', () => {
-        greenCount1.textContent = 1;
-        brownCount1.textContent = 2;
-        blueCount1.textContent = 1;
-        greenCount2.textContent = 3;
-        brownCount2.textContent = 2;
-        blueCount2.textContent = 1;
-        greenCount3.textContent = 2;
-        brownCount3.textContent = 4;
-        blueCount3.textContent = 0;
-    });
-};
-setLevel();
-
-// select difficulty level
-
-function changeLevel() {
-    diff1.addEventListener('click', () => {
-        diff1.classList.toggle('active');
-        currentState.classList.toggle('hidden');
-        backCard.classList.remove('hidden');
-    })
-    diff2.addEventListener('click', () => {
-        diff2.classList.toggle('active');
-        currentState.classList.toggle('hidden');
-        backCard.classList.remove('hidden');
-    })
-    diff3.addEventListener('click', () => {
-        diff3.classList.toggle('active');
-        currentState.classList.toggle('hidden');
-        backCard.classList.remove('hidden');
-    })
-    diff4.addEventListener('click', () => {
-        diff4.classList.toggle('active');
-        currentState.classList.toggle('hidden');
-        backCard.classList.remove('hidden');
-    })
-    diff5.addEventListener('click', () => {
-        diff5.classList.toggle('active');
-        currentState.classList.toggle('hidden');
-        backCard.classList.remove('hidden');
-    })
-}
-changeLevel();
-
-
 // arrays
 
 // blue cards
@@ -444,6 +340,249 @@ const cardsDataBrown = [
       color:'brown'
     },
   ]
+let cards = cardsDataBlue.concat(cardsDataGreen, cardsDataBrown);
+// const blueCommonHardCards = cards.filter(
+//     (card) => card.color === "blue" && card.type !== "easy"
+//   );
+
+function selectDeck() {
+    document.querySelectorAll('.ancient-card').forEach((ancients) => {
+        ancients.addEventListener('click', function(e) {
+            e.target.classList.toggle("active");
+            diff1.classList.toggle('hidden');
+            diff2.classList.toggle('hidden');
+            diff3.classList.toggle('hidden');
+            diff4.classList.toggle('hidden');
+            diff5.classList.toggle('hidden');
+        })
+    })
+}
+selectDeck();
+
+// select ancients
+
+const ancient1 = document.querySelector('.item1');
+const ancient2 = document.querySelector('.item2');
+const ancient3 = document.querySelector('.item3');
+const ancient4 = document.querySelector('.item4');
+
+function setCounter () {
+    ancient1.addEventListener('click', () => {
+        greenCount1.textContent = 1;
+        brownCount1.textContent = 2;
+        blueCount1.textContent = 1;
+        greenCount2.textContent = 2;
+        brownCount2.textContent = 3;
+        blueCount2.textContent = 1;
+        greenCount3.textContent = 2;
+        brownCount3.textContent = 4;
+        blueCount3.textContent = 0;
+    });
+    ancient2.addEventListener('click', () => {
+        greenCount1.textContent = 0;
+        brownCount1.textContent = 2;
+        blueCount1.textContent = 2;
+        greenCount2.textContent = 1;
+        brownCount2.textContent = 3;
+        blueCount2.textContent = 0;
+        greenCount3.textContent = 3;
+        brownCount3.textContent = 4;
+        blueCount3.textContent = 0;
+    });
+    ancient3.addEventListener('click', () => {
+        greenCount1.textContent = 0;
+        brownCount1.textContent = 2;
+        blueCount1.textContent = 1;
+        greenCount2.textContent = 2;
+        brownCount2.textContent = 3;
+        blueCount2.textContent = 1;
+        greenCount3.textContent = 3;
+        brownCount3.textContent = 4;
+        blueCount3.textContent = 0;
+    });
+    ancient4.addEventListener('click', () => {
+        greenCount1.textContent = 1;
+        brownCount1.textContent = 2;
+        blueCount1.textContent = 1;
+        greenCount2.textContent = 3;
+        brownCount2.textContent = 2;
+        blueCount2.textContent = 1;
+        greenCount3.textContent = 2;
+        brownCount3.textContent = 4;
+        blueCount3.textContent = 0;
+    });
+};
+setCounter();
+
+// select difficulty level
+
+function changeLevel() {
+
+    diff1.addEventListener('click', () => {
+        diff1.classList.toggle('active');
+        currentState.classList.toggle('hidden');
+        backCard.classList.remove('hidden');
+        const veryEasyArr = cards.filter(
+            (card) => card.difficulty === 'easy' || card.difficulty === 'normal'
+          );
+        // console.log(veryEasyArr)  
+        function changeLastCard() {      
+            let fullDeck = getRandomNum(1, 38);
+            backCard.addEventListener('click', () => {
+                lastCard.classList.remove('hidden');
+                lastCard.style.backgroundImage = `url(${veryEasyArr[fullDeck].cardFace})`;
+        
+                if (lastCard.style.backgroundImage.includes('green')) {
+                    greenCount1.textContent = greenCount1.textContent - 1;
+                }
+                if (lastCard.style.backgroundImage.includes('blue')) {
+                    blueCount1.textContent = blueCount1.textContent - 1;
+                }
+                if (lastCard.style.backgroundImage.includes('brown')) {
+                    brownCount1.textContent = brownCount1.textContent - 1;
+                }
+            })       
+        };
+        function getNewCardStage() {
+            backCard.addEventListener('click', () => {
+                getNewCardStage();
+            });
+            changeLastCard();
+        }
+        getNewCardStage();
+
+    })
+    diff2.addEventListener('click', () => {
+        diff2.classList.toggle('active');
+        currentState.classList.toggle('hidden');
+        backCard.classList.remove('hidden');
+        const easyArr = cards.filter(
+            (card) => card.difficulty !== 'hard'
+          );
+        //   console.log(easyArr)  
+          function changeLastCard() {      
+              let fullDeck = getRandomNum(1, 38);
+              backCard.addEventListener('click', () => {
+                  lastCard.classList.remove('hidden');
+                  lastCard.style.backgroundImage = `url(${easyArr[fullDeck].cardFace})`;
+          
+                  if (lastCard.style.backgroundImage.includes('green')) {
+                      greenCount1.textContent = greenCount1.textContent - 1;
+                  }
+                  if (lastCard.style.backgroundImage.includes('blue')) {
+                      blueCount1.textContent = blueCount1.textContent - 1;
+                  }
+                  if (lastCard.style.backgroundImage.includes('brown')) {
+                      brownCount1.textContent = brownCount1.textContent - 1;
+                  }
+              })       
+          };
+          function getNewCardStage() {
+              backCard.addEventListener('click', () => {
+                  getNewCardStage();
+              });
+              changeLastCard();
+          }
+          getNewCardStage();
+    })
+    diff3.addEventListener('click', () => {
+        diff3.classList.toggle('active');
+        currentState.classList.toggle('hidden');
+        backCard.classList.remove('hidden');
+          function changeLastCard() {      
+              let fullDeck = getRandomNum(1, 52);
+              backCard.addEventListener('click', () => {
+                  lastCard.classList.remove('hidden');
+                  lastCard.style.backgroundImage = `url(${cards[fullDeck].cardFace})`;
+          
+                  if (lastCard.style.backgroundImage.includes('green')) {
+                      greenCount1.textContent = greenCount1.textContent - 1;
+                  }
+                  if (lastCard.style.backgroundImage.includes('blue')) {
+                      blueCount1.textContent = blueCount1.textContent - 1;
+                  }
+                  if (lastCard.style.backgroundImage.includes('brown')) {
+                      brownCount1.textContent = brownCount1.textContent - 1;
+                  }
+              })       
+          };
+          function getNewCardStage() {
+              backCard.addEventListener('click', () => {
+                  getNewCardStage();
+              });
+              changeLastCard();
+          }
+          getNewCardStage();
+        
+    })
+    diff4.addEventListener('click', () => {
+        diff4.classList.toggle('active');
+        currentState.classList.toggle('hidden');
+        backCard.classList.remove('hidden');
+        const difficultArr = cards.filter(
+            (card) => card.difficulty !== 'easy'
+          );
+        // console.log(difficultArr)  
+        function changeLastCard() {      
+            let fullDeck = getRandomNum(1, 38);
+            backCard.addEventListener('click', () => {
+                lastCard.classList.remove('hidden');
+                lastCard.style.backgroundImage = `url(${difficultArr[fullDeck].cardFace})`;
+        
+                if (lastCard.style.backgroundImage.includes('green')) {
+                    greenCount1.textContent = greenCount1.textContent - 1;
+                }
+                if (lastCard.style.backgroundImage.includes('blue')) {
+                    blueCount1.textContent = blueCount1.textContent - 1;
+                }
+                if (lastCard.style.backgroundImage.includes('brown')) {
+                    brownCount1.textContent = brownCount1.textContent - 1;
+                }
+            })       
+        };
+        function getNewCardStage() {
+            backCard.addEventListener('click', () => {
+                getNewCardStage();
+            });
+            changeLastCard();
+        }
+        getNewCardStage();  
+    })
+    diff5.addEventListener('click', () => {
+        diff5.classList.toggle('active');
+        currentState.classList.toggle('hidden');
+        backCard.classList.remove('hidden');
+        const hardArr = cards.filter(
+            (card) => card.difficulty === 'hard'
+          );
+          console.log(hardArr)  
+          function changeLastCard() {      
+              let fullDeck = getRandomNum(1, 15);
+              backCard.addEventListener('click', () => {
+                  lastCard.classList.remove('hidden');
+                  lastCard.style.backgroundImage = `url(${hardArr[fullDeck].cardFace})`;
+          
+                  if (lastCard.style.backgroundImage.includes('green')) {
+                      greenCount1.textContent = greenCount1.textContent - 1;
+                  }
+                  if (lastCard.style.backgroundImage.includes('blue')) {
+                      blueCount1.textContent = blueCount1.textContent - 1;
+                  }
+                  if (lastCard.style.backgroundImage.includes('brown')) {
+                      brownCount1.textContent = brownCount1.textContent - 1;
+                  }
+              })       
+          };
+          function getNewCardStage() {
+              backCard.addEventListener('click', () => {
+                  getNewCardStage();
+              });
+              changeLastCard();
+          }
+          getNewCardStage();    
+    })
+}
+changeLevel();
 
 //--------------------------randomizer
 
@@ -454,7 +593,7 @@ function getRandomNum(min, max) {
     return randomNum;
 }
 
-//--------------------------decks
+// counter styling
 greenCount1.style.color = "white";
 brownCount1.style.color = "white";
 blueCount1.style.color = "white";
@@ -464,54 +603,3 @@ blueCount2.style.color = "white";
 greenCount3.style.color = "white";
 brownCount3.style.color = "white";
 blueCount3.style.color = "white";
-let cards = cardsDataBlue.concat(cardsDataGreen, cardsDataBrown);
-const blueCommonHardCards = cards.filter(
-    (card) => card.color === "blue" && card.type !== "easy"
-  );
-
-// const blueCommonHardCards = cards.filter(
-//     (card) => card.color === "blue" && card.type === "easy"
-//   );
-
-
-function changeLastCard() {      
-    let fullDeck = getRandomNum(1, 52);
-    
-    let noGreen = cards.filter(remove => remove.color !== 'green')
-    let noBlue = cards.filter(remove => remove.color !== 'blue') 
-    let noBrown = cards.filter(remove => remove.color !== 'brown')  
-
-    greenCount1.textContent = 1;
-    brownCount1.textContent = 2;
-    blueCount1.textContent = 1;
-    backCard.addEventListener('click', () => {
-        lastCard.classList.remove('hidden');
-        lastCard.style.backgroundImage = `url(${cards[fullDeck].cardFace})`;
-
-        if (lastCard.style.backgroundImage.includes('green') && greenCount1.textContent !== 0) {
-            greenCount1.textContent = greenCount1.textContent - 1;
-        }
-        if (lastCard.style.backgroundImage.includes('blue') && blueCount1.textContent !== 0) {
-            blueCount1.textContent = blueCount1.textContent - 1;
-        }
-        if (lastCard.style.backgroundImage.includes('brown') && brownCount1.textContent !== 0) {
-            brownCount1.textContent = brownCount1.textContent - 1;
-        }
-
-        if (greenCount1.textContent === 0) return noGreen;
-        if (blueCount1.textContent === 0) return noBlue;
-        if (brownCount1.textContent === 0) return noBrown;
-    })
-        
-};
-
-
-//--------------------------shuffles and counters
-
-function getNewCardStage() {
-        backCard.addEventListener('click', () => {
-            getNewCardStage();
-        });
-        changeLastCard();
-}
-getNewCardStage();
