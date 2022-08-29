@@ -430,28 +430,28 @@ function changeLevel() {
         const veryEasyArr = cards.filter(
             (card) => card.difficulty === 'easy' || card.difficulty === 'normal'
           ); 
-        function changeLastCard() {      
-            let fullDeck = getRandomNum(1, 38);
+          console.log(veryEasyArr)
+        function changeLastCard() {  
+            let fullDeck = getRandomNum(0, 38);
             backCard.addEventListener('click', () => {
                 lastCard.classList.remove('hidden');
-                lastCard.style.backgroundImage = `url(${veryEasyArr[fullDeck].cardFace})`;
-        
-                // if (lastCard.style.backgroundImage.includes('green')) {
-                //     greenCount1.textContent = greenCount1.textContent - 1;
-                // }
-                // if (lastCard.style.backgroundImage.includes('blue')) {
-                //     blueCount1.textContent = blueCount1.textContent - 1;
-                // }
-                // if (lastCard.style.backgroundImage.includes('brown')) {
-                //     brownCount1.textContent = brownCount1.textContent - 1;
-                // }
+                lastCard.style.backgroundImage = `url(${[veryEasyArr[fullDeck].cardFace]})`;
+                if (lastCard.style.backgroundImage.includes('green')) {
+                    greenCount1.textContent = greenCount1.textContent - 1;
+                }
+                if (lastCard.style.backgroundImage.includes('blue')) {
+                    blueCount1.textContent = blueCount1.textContent - 1;
+                }
+                if (lastCard.style.backgroundImage.includes('brown')) {
+                    brownCount1.textContent = brownCount1.textContent - 1;
+                }
             })       
         };
         function getNewCardStage() {
             backCard.addEventListener('click', () => {
-                getNewCardStage();
+                changeLastCard();
             });
-            changeLastCard();
+
         }
         getNewCardStage();
 
@@ -482,9 +482,8 @@ function changeLevel() {
           };
           function getNewCardStage() {
               backCard.addEventListener('click', () => {
-                  getNewCardStage();
+                changeLastCard();
               });
-              changeLastCard();
           }
           getNewCardStage();
     })
@@ -511,9 +510,8 @@ function changeLevel() {
           };
           function getNewCardStage() {
               backCard.addEventListener('click', () => {
-                  getNewCardStage();
+                changeLastCard();
               });
-              changeLastCard();
           }
           getNewCardStage();
         
@@ -544,9 +542,8 @@ function changeLevel() {
         };
         function getNewCardStage() {
             backCard.addEventListener('click', () => {
-                getNewCardStage();
+                changeLastCard();
             });
-            changeLastCard();
         }
         getNewCardStage();  
     })
@@ -577,9 +574,8 @@ function changeLevel() {
           };
           function getNewCardStage() {
               backCard.addEventListener('click', () => {
-                  getNewCardStage();
+                changeLastCard();
               });
-              changeLastCard();
           }
           getNewCardStage();    
     })
