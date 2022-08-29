@@ -7,6 +7,7 @@ const diff5 = document.querySelector('.hard');
 const backCard = document.querySelector('.deck');
 const currentState = document.querySelector('.current-state');
 const lastCard = document.querySelector('.last-card');
+const reload = document.querySelector('.refresh');
 //generate deck
 let randomNum;
 let greenCount1 = document.querySelector('.green1');
@@ -18,6 +19,10 @@ let blueCount2 = document.querySelector('.blue2');
 let greenCount3 = document.querySelector('.green3');
 let brownCount3 = document.querySelector('.brown3');
 let blueCount3 = document.querySelector('.blue3');
+
+reload.addEventListener('click', () => {
+    window.location.reload();
+})
 // arrays
 
 // blue cards
@@ -424,23 +429,22 @@ function changeLevel() {
         backCard.classList.remove('hidden');
         const veryEasyArr = cards.filter(
             (card) => card.difficulty === 'easy' || card.difficulty === 'normal'
-          );
-        // console.log(veryEasyArr)  
+          ); 
         function changeLastCard() {      
             let fullDeck = getRandomNum(1, 38);
             backCard.addEventListener('click', () => {
                 lastCard.classList.remove('hidden');
                 lastCard.style.backgroundImage = `url(${veryEasyArr[fullDeck].cardFace})`;
         
-                if (lastCard.style.backgroundImage.includes('green')) {
-                    greenCount1.textContent = greenCount1.textContent - 1;
-                }
-                if (lastCard.style.backgroundImage.includes('blue')) {
-                    blueCount1.textContent = blueCount1.textContent - 1;
-                }
-                if (lastCard.style.backgroundImage.includes('brown')) {
-                    brownCount1.textContent = brownCount1.textContent - 1;
-                }
+                // if (lastCard.style.backgroundImage.includes('green')) {
+                //     greenCount1.textContent = greenCount1.textContent - 1;
+                // }
+                // if (lastCard.style.backgroundImage.includes('blue')) {
+                //     blueCount1.textContent = blueCount1.textContent - 1;
+                // }
+                // if (lastCard.style.backgroundImage.includes('brown')) {
+                //     brownCount1.textContent = brownCount1.textContent - 1;
+                // }
             })       
         };
         function getNewCardStage() {
@@ -459,7 +463,6 @@ function changeLevel() {
         const easyArr = cards.filter(
             (card) => card.difficulty !== 'hard'
           );
-        //   console.log(easyArr)  
           function changeLastCard() {      
               let fullDeck = getRandomNum(1, 38);
               backCard.addEventListener('click', () => {
@@ -521,8 +524,7 @@ function changeLevel() {
         backCard.classList.remove('hidden');
         const difficultArr = cards.filter(
             (card) => card.difficulty !== 'easy'
-          );
-        // console.log(difficultArr)  
+          ); 
         function changeLastCard() {      
             let fullDeck = getRandomNum(1, 38);
             backCard.addEventListener('click', () => {
