@@ -1,81 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
 
     <title>Eldritch Horror</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="wrapper">
-        <!-- ancients picker -->
-        <div class="ancients-container">
-            <div class="ancients-wrapper">
-                <p class="card-headline" style = "text-align: center; color: red">Ancient cards picker</p>
-                <div class="ancients-wrapper1">
-                    <div class="ancient-card item1" style = "background-image: url('./assets/Ancients/Azathoth.png')"></div>
-                    <div class="ancient-card item2" style = "background-image: url('./assets/Ancients/Cthulthu.png')"></div>
-                    <div class="ancient-card item3" style = "background-image: url('./assets/Ancients/IogSothoth.png')"></div>
-                    <div class="ancient-card item4" style = "background-image: url('./assets/Ancients/ShubNiggurath.png')"></div>
-                </div>
+
+      <div class="ancients-container">
+        <div class="ancients-wrapper">
+          <p class="card-headline" style="text-align: center; color: red">
+            Ancient cards picker
+          </p>
+          <div class="ancients-wrapper1">
+            <div
+              class="ancient-card item1"
+              style="background-image: url('./assets/Ancients/Azathoth.png')"
+            ></div>
+            <div
+              class="ancient-card item2"
+              style="background-image: url('./assets/Ancients/Cthulthu.png')"
+            ></div>
+            <div
+              class="ancient-card item3"
+              style="background-image: url('./assets/Ancients/IogSothoth.png')"
+            ></div>
+            <div
+              class="ancient-card item4"
+              style="
+                background-image: url('./assets/Ancients/ShubNiggurath.png');
+              "
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="level-container">
+        <p class="card-headline" style="text-align: center; color: red">
+          Pick a difficulty level
+        </p>
+        <button class="very-easy hidden">Very Easy</button>
+        <button class="easy hidden">Easy</button>
+        <button class="medium hidden">Medium</button>
+        <button class="difficult hidden">Difficult</button>
+        <button class="hard hidden">Hard</button>
+      </div>
+
+      <div class="deck-container">
+        <p class="card-headline" style="text-align: center; color: red">
+          Draw your cards
+        </p>
+        <button class="refresh">Restart</button>
+
+        <div class="current-state hidden">
+          <div class="stage-container">
+            <span class="stage-text">First stage</span>
+            <div class="dots-container">
+              <div class="dot green1" id="dot1"></div>
+              <div class="dot brown1" id="dot2"></div>
+              <div class="dot blue1" id="dot3"></div>
             </div>
-        </div>
-        <!-- level picker -->
-        <div class="level-container">
-            <p class="card-headline" style = "text-align: center; color: red">Pick a difficulty level</p>
-            <button class="very-easy hidden">
-                Very Easy
-            </button>
-            <button class="easy hidden">
-                Easy
-            </button>
-            <button class="medium hidden">
-                Medium
-            </button>
-            <button class="difficult hidden">
-                Difficult
-            </button>
-            <button class="hard hidden">
-                Hard
-            </button>
-        </div>
-        <div class="deck-container">
-            <p class="card-headline" style = "text-align: center; color: red">Draw your cards</p>
-            <button class="refresh">Restart</button>
-            <div class="current-state hidden">
-                <div class="stage-container">
-                    <span class="stage-text">First stage</span>
-                    <div class="dots-container">
-                        <div class="dot green1"></div>
-                        <div class="dot brown1"></div>
-                        <div class="dot blue1"></div>
-                    </div>
-                </div>
-                <div class="stage-container">
-                    <span class="stage-text">Second stage</span>
-                    <div class="dots-container">
-                        <div class="dot green2"></div>
-                        <div class="dot brown2"></div>
-                        <div class="dot blue2"></div>
-                    </div>
-                </div>
-                <div class="stage-container">
-                    <span class="stage-text">Third stage</span>
-                    <div class="dots-container">
-                        <div class="dot green3"></div>
-                        <div class="dot brown3"></div>
-                        <div class="dot blue3"></div>
-                    </div>
-                </div>
-                <div class="deck-wrapper">
-                    <div class="deck hidden" style="background-image: url('./assets/mythicCardBackground.png');"></div>
-                    <div class="last-card hidden"></div>
-                </div>
+          </div>
+          <div class="stage-container">
+            <span class="stage-text">Second stage</span>
+            <div class="dots-container">
+              <div class="dot green2" id="dot4"></div>
+              <div class="dot brown2" id="dot5 "></div>
+              <div class="dot blue2" id="dot6"></div>
             </div>
+          </div>
+          <div class="stage-container">
+            <span class="stage-text">Third stage</span>
+            <div class="dots-container">
+              <div class="dot green3" id="dot7"></div>
+              <div class="dot brown3" id="dot8"></div>
+              <div class="dot blue3" id="dot9"></div>
+            </div>
+          </div>
+          <div class="deck-wrapper">
+            <div
+              class="deck hidden"
+              style="background-image: url('./assets/mythicCardBackground.png')"></div>
+            <div class="last-card hidden"></div>
+          </div>
         </div>
+      </div>
+
     </div>
-<script src="index.js" type="module"></script>
-</body>
+    <script src="./index.js" type="module"></script>
+  </body>
 </html>
