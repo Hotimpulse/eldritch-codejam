@@ -15,26 +15,6 @@ let greenCount3 = document.querySelector('.green3');
 let brownCount3 = document.querySelector('.brown3');
 let blueCount3 = document.querySelector('.blue3');
 
-// counters
-const dot1 = document.getElementById('dot1');
-let dot1Value;
-const dot2 = document.getElementById('dot2');
-let dot2Value;
-const dot3 = document.getElementById('dot3');
-let dot3Value;
-const dot4 = document.getElementById('dot4');
-let dot4Value;
-const dot5 = document.getElementById('dot5');
-let dot5Value;
-const dot6 = document.getElementById('dot6');
-let dot6Value;
-const dot7 = document.getElementById('dot7');
-let dot7Value;
-const dot8 = document.getElementById('dot8');
-let dot8Value;
-const dot9 = document.getElementById('dot9');
-let dot9Value;
-
 // counter styling
 greenCount1.style.color = "white";
 brownCount1.style.color = "white";
@@ -47,9 +27,9 @@ brownCount3.style.color = "white";
 blueCount3.style.color = "white";
 reload.addEventListener('click', () => {
   window.location.reload();
-})
-// arrays
-// blue cards
+});
+
+// array of blue cards
 
 const cardsDataBlue = [
   {
@@ -126,7 +106,7 @@ const cardsDataBlue = [
   },
 ]
 
-// green cards
+// array of green cards
 
 const cardsDataGreen = [
   {
@@ -239,7 +219,7 @@ const cardsDataGreen = [
   },
 ]
 
-// brown cards
+// array of brown cards
 
 const cardsDataBrown = [
   {
@@ -372,6 +352,7 @@ const cardsDataBrown = [
 let cards = [...cardsDataBlue, ...cardsDataBrown, ...cardsDataGreen]; // 51 cards
 
 //random number, max included
+
 function getRandomNum(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -385,26 +366,6 @@ function shuffle(array) {
   }
   return array;
 }
-
-
-// const blueNormalHardCards = cards.filter((card) => card.color === "blue" && card.difficulty !== "easy");
-// const greenNormalHardCards = cards.filter((card) => card.color === "green" && card.difficulty !== "easy");
-// const brownNormalHardCards = cards.filter((card) => card.color === "brown" && card.difficulty !== "easy");
-
-
-function selectDeck() {
-  document.querySelectorAll('.ancient-card').forEach((ancients) => {
-    ancients.addEventListener('click', function (e) {
-      e.target.classList.toggle("active");
-      veryEasyDifficulty.classList.toggle('hidden');
-      easyDifficulty.classList.toggle('hidden');
-      mediumDifficulty.classList.toggle('hidden');
-      difficultDifficulty.classList.toggle('hidden');
-      hardDifficulty.classList.toggle('hidden');
-    })
-  })
-}
-selectDeck();
 
 // select ancients
 
@@ -427,120 +388,910 @@ const hardArray = cards.filter((card) => card.difficulty === 'hard'); // 14 card
 const easyArray = cards.filter((card) => card.difficulty === "easy"); // 14 cards
 const normalArray = cards.filter((card) => card.difficulty === 'normal'); // 23 cards
 
-veryEasyDifficulty.addEventListener('click', () => {
-  currentState.classList.remove('hidden');
-  backCard.classList.remove('hidden');
-  lastCard.classList.remove('hidden');
-  const stages = [
-    { green: 1, brown: 2, blue: 1 },
-    { green: 2, brown: 3, blue: 1 },
-    { green: 2, brown: 4 },
-  ];
-  (function fillCounter() {
-    for (let i = 0; i < 1; i++) {
-      greenCount1.textContent = stages[i].green;
-      brownCount1.textContent = stages[i].brown;
-      blueCount1.textContent = stages[i].blue;
+// the following function creates the necessary deck based on a certain array, needed counts of cards, and needed length
+function fillArray(arrayMain, newFilledArray, maxGreenCount, maxBrownCount, maxBlueCount, totalCards) {
+
+  let greenCount = 0;
+  let blueCount = 0;
+  let brownCount = 0;
+
+  arrayMain.forEach(card => {
+    let greenCards = card.color.includes('green');
+    let blueCards = card.color.includes('blue');
+    let brownCards = card.color.includes('brown');
+    if ((card.difficulty === 'easy') && newFilledArray.length < totalCards) {
+      if (greenCards && (greenCount < maxGreenCount)) {
+        newFilledArray.push(card);
+        greenCount++;
+      } else if (blueCards && (blueCount < maxBlueCount)) {
+        newFilledArray.push(card);
+        blueCount++;
+      } else if (brownCards && (brownCount < maxBrownCount)) {
+        newFilledArray.push(card);
+        brownCount++;
+      }
     }
 
-    for (let i = 1; i < 2; i++) {
-      greenCount2.textContent = stages[i].green;
-      brownCount2.textContent = stages[i].brown;
-      blueCount2.textContent = stages[i].blue;
+    if ((card.difficulty === 'normal') && newFilledArray.length < totalCards) {
+      if (greenCards && (greenCount < maxGreenCount)) {
+        newFilledArray.push(card);
+        greenCount++;
+      } else if (blueCards && (blueCount < maxBlueCount)) {
+        newFilledArray.push(card);
+        blueCount++;
+      } else if (brownCards && (brownCount < maxBrownCount)) {
+        newFilledArray.push(card);
+        brownCount++;
+      }
     }
 
-    for (let i = 2; i < 3; i++) {
-      greenCount3.textContent = stages[i].green;
-      brownCount3.textContent = stages[i].brown;
-      blueCount3.textContent = 0;
+    if ((card.difficulty === 'hard') && newFilledArray.length < totalCards) {
+      if (greenCards && (greenCount < maxGreenCount)) {
+        newFilledArray.push(card);
+        greenCount++;
+      } else if (blueCards && (blueCount < maxBlueCount)) {
+        newFilledArray.push(card);
+        blueCount++;
+      } else if (brownCards && (brownCount < maxBrownCount)) {
+        newFilledArray.push(card);
+        brownCount++;
+      }
     }
-  })();
+  });
 
-  const easyNormalArray = [...easyArray, ...normalArray];
-  let easyShuffledArray = [];
+  shuffle(newFilledArray);
+  console.log(newFilledArray)
+};
 
-  (function fillArray() {
+// the following function goes through all the cards in a deck, displays them and updates the counter
+function drawCard(newFilledArray) {
 
-    const maxGreen = 5;
-    const maxBrown = 9;
-    const maxBlue = 2;
+  if (newFilledArray.length > 0) {
 
-    let greenCount = 0;
-    let blueCount = 0;
-    let brownCount = 0;
+    const card = newFilledArray.pop();
+    console.log(newFilledArray);
+    lastCard.style.background = ``;
 
-    easyNormalArray.forEach(card => {
-      let greenCards = card.color.includes('green');
-      let blueCards = card.color.includes('blue');
-      let brownCards = card.color.includes('brown');
-      if (card.difficulty === 'easy' && easyShuffledArray.length < 16) {
-        if (greenCards && (greenCount < maxGreen)) {
-          easyShuffledArray.push(card);
-          greenCount++;
-        } else if (blueCards && (blueCount < maxBlue)) {
-          easyShuffledArray.push(card);
-          blueCount++;
-        } else if (brownCards && (brownCount < maxBrown)) {
-          easyShuffledArray.push(card);
-          brownCount++;
-        }
+    let cardface = card.cardFace;
+    lastCard.style.background = `url(${cardface})`;
+
+    // updates the counter
+    if (greenCount1.textContent > 0 && cardface.includes(`green`)) {
+      greenCount1.textContent--;
+    } else if (greenCount2.textContent > 0 && cardface.includes(`green`)) {
+      greenCount2.textContent--;
+    } else if (greenCount3.textContent > 0 && cardface.includes(`green`)) {
+      greenCount3.textContent--;
+    } else if (brownCount1.textContent > 0 && cardface.includes(`brown`)) {
+      brownCount1.textContent--;
+    } else if (brownCount2.textContent > 0 && cardface.includes(`brown`)) {
+      brownCount2.textContent--;
+    } else if (brownCount3.textContent > 0 && cardface.includes(`brown`)) {
+      brownCount3.textContent--;
+    } else if (blueCount1.textContent > 0 && cardface.includes(`blue`)) {
+      blueCount1.textContent--;
+    } else if (blueCount2.textContent > 0 && cardface.includes(`blue`)) {
+      blueCount2.textContent--;
+    } else if (blueCount3.textContent > 0 && cardface.includes(`blue`)) {
+      blueCount3.textContent--;
+    }
+  } else {
+    lastCard.style.transform = `translateX(-260px)`;
+    lastCard.style.opacity = `0`;
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+    return;
+  }
+};
+
+// selecting 5 levels of difficulty logic for each Ancient
+function selectAncient() {
+  const ancientCards = document.querySelectorAll('.ancient-card');
+
+  ancientCards.forEach((ancientCard) => {
+    ancientCard.addEventListener('click', () => {
+      ancientCards.forEach((card) => {
+        card.classList.remove("active");
+      });
+      ancientCard.classList.toggle("active");
+      if (ancientCard.classList.contains('active')) {
+        veryEasyDifficulty.classList.remove('hidden');
+        easyDifficulty.classList.remove('hidden');
+        mediumDifficulty.classList.remove('hidden');
+        difficultDifficulty.classList.remove('hidden');
+        hardDifficulty.classList.remove('hidden');
+      } else {
+        veryEasyDifficulty.classList.add('hidden');
+        easyDifficulty.classList.add('hidden');
+        mediumDifficulty.classList.add('hidden');
+        difficultDifficulty.classList.add('hidden');
+        hardDifficulty.classList.add('hidden');
+      }
+      // Azathoth decks
+      if (ancientCard.classList.contains('item1')) {
+        const selectAzathothLevel = [{
+          level1: veryEasyDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 1, brown: 2, blue: 1 },
+              { green: 2, brown: 3, blue: 1 },
+              { green: 2, brown: 4, blue: 0 },
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const easyNormalArray = [...easyArray, ...normalArray];
+            let easyShuffledArray = [];
+
+            fillArray(easyNormalArray, easyShuffledArray, 5, 9, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(easyShuffledArray);
+            })
+          }),
+          level2: easyDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 1, brown: 2, blue: 1 },
+              { green: 2, brown: 3, blue: 1 },
+              { green: 2, brown: 4, blue: 0 },
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;;
+              }
+            })();
+
+            const easyNormalArray = [...easyArray, ...normalArray];
+            let easyShuffledArray = [];
+
+            fillArray(easyNormalArray, easyShuffledArray, 5, 9, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(easyShuffledArray);
+            })
+          }),
+          level3: mediumDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 1, brown: 2, blue: 1 },
+              { green: 2, brown: 3, blue: 1 },
+              { green: 2, brown: 4, blue: 0 },
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;;
+              }
+            })();
+
+            const mediumArray = [...easyArray, ...normalArray, ...hardArray];
+            let mediumShuffledArray = [];
+
+            fillArray(mediumArray, mediumShuffledArray, 5, 9, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(mediumShuffledArray);
+            })
+          }),
+          level4: difficultDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 1, brown: 2, blue: 1 },
+              { green: 2, brown: 3, blue: 1 },
+              { green: 2, brown: 4, blue: 0 },
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;;
+              }
+            })();
+
+            const difficultArray = [...hardArray, ...normalArray];
+            let difficultShuffledArray = [];
+
+            fillArray(difficultArray, difficultShuffledArray, 5, 9, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(difficultShuffledArray);
+            })
+          }),
+          level5: hardDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 1, brown: 2, blue: 1 },
+              { green: 2, brown: 3, blue: 1 },
+              { green: 2, brown: 4, blue: 0 },
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;;
+              }
+            })();
+
+            const mostDifficultArray = [...hardArray, ...normalArray];
+            let mostDifficultShuffledArray = [];
+
+            fillArray(mostDifficultArray, mostDifficultShuffledArray, 5, 9, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(mostDifficultShuffledArray);
+            })
+          })
+        }]
+      }
+      // Ctulhu decks
+      if (ancientCard.classList.contains('item2')) {
+        const selectCtulhuLevel = [{
+          level1: veryEasyDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 0, brown: 2, blue: 2 },
+              { green: 1, brown: 3, blue: 0 },
+              { green: 3, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const easyNormalArray = [...easyArray, ...normalArray];
+            let easyShuffledArray = [];
+
+            fillArray(easyNormalArray, easyShuffledArray, 4, 9, 2, 15);
+
+            backCard.addEventListener('click', () => {
+              drawCard(easyShuffledArray);
+            })
+          }),
+          level2: easyDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 0, brown: 2, blue: 2 },
+              { green: 1, brown: 3, blue: 0 },
+              { green: 3, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const easyNormalArray = [...easyArray, ...normalArray];
+            let easyShuffledArray = [];
+
+            fillArray(easyNormalArray, easyShuffledArray, 4, 9, 2, 15);
+
+            backCard.addEventListener('click', () => {
+              drawCard(easyShuffledArray);
+            })
+          }),
+          level3: mediumDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 0, brown: 2, blue: 2 },
+              { green: 1, brown: 3, blue: 0 },
+              { green: 3, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const mediumArray = [...easyArray, ...normalArray, ...hardArray];
+            let mediumShuffledArray = [];
+
+            fillArray(mediumArray, mediumShuffledArray, 4, 9, 2, 15);
+
+            backCard.addEventListener('click', () => {
+              drawCard(mediumShuffledArray);
+            })
+          }),
+          level4: difficultDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 0, brown: 2, blue: 2 },
+              { green: 1, brown: 3, blue: 0 },
+              { green: 3, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const difficultArray = [...hardArray, ...normalArray];
+            let difficultShuffledArray = [];
+
+            fillArray(difficultArray, difficultShuffledArray, 4, 9, 2, 15);
+
+            backCard.addEventListener('click', () => {
+              drawCard(difficultShuffledArray);
+            })
+          }),
+          level5: hardDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 0, brown: 2, blue: 2 },
+              { green: 1, brown: 3, blue: 0 },
+              { green: 3, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const mostDifficultArray = [...hardArray, ...normalArray];
+            let mostDifficultShuffledArray = [];
+
+            fillArray(mostDifficultArray, mostDifficultShuffledArray, 4, 9, 2, 15);
+
+            backCard.addEventListener('click', () => {
+              drawCard(mostDifficultShuffledArray);
+            })
+          })
+        }]
       }
 
-      if (card.difficulty === 'normal' && easyShuffledArray.length < 16) {
-        if (greenCards && (greenCount < maxGreen)) {
-          easyShuffledArray.push(card);
-          greenCount++;
-        } else if (blueCards && (blueCount < maxBlue)) {
-          easyShuffledArray.push(card);
-          blueCount++;
-        } else if (brownCards && (brownCount < maxBrown)) {
-          easyShuffledArray.push(card);
-          brownCount++;
-        }
+      // Yog-Sothoth decks
+      if (ancientCard.classList.contains('item3')) {
+        const selectYogSothothLevel = [{
+          level1: veryEasyDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 0, brown: 2, blue: 1 },
+              { green: 2, brown: 3, blue: 1 },
+              { green: 3, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const easyNormalArray = [...easyArray, ...normalArray];
+            let easyShuffledArray = [];
+
+            fillArray(easyNormalArray, easyShuffledArray, 5, 9, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(easyShuffledArray);
+            })
+          }),
+          level2: easyDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 0, brown: 2, blue: 1 },
+              { green: 2, brown: 3, blue: 1 },
+              { green: 3, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const easyNormalArray = [...easyArray, ...normalArray];
+            let easyShuffledArray = [];
+
+            fillArray(easyNormalArray, easyShuffledArray, 5, 9, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(easyShuffledArray);
+            })
+          }),
+          level3: mediumDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 0, brown: 2, blue: 1 },
+              { green: 2, brown: 3, blue: 1 },
+              { green: 3, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const mediumArray = [...easyArray, ...normalArray, ...hardArray];
+            let mediumShuffledArray = [];
+
+            fillArray(mediumArray, mediumShuffledArray, 5, 9, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(mediumShuffledArray);
+            })
+          }),
+          level4: difficultDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 0, brown: 2, blue: 1 },
+              { green: 2, brown: 3, blue: 1 },
+              { green: 3, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const difficultArray = [...hardArray, ...normalArray];
+            let difficultShuffledArray = [];
+
+            fillArray(difficultArray, difficultShuffledArray, 5, 9, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(difficultShuffledArray);
+            })
+          }),
+          level5: hardDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 0, brown: 2, blue: 1 },
+              { green: 2, brown: 3, blue: 1 },
+              { green: 3, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const mostDifficultArray = [...hardArray, ...normalArray];
+            let mostDifficultShuffledArray = [];
+
+            fillArray(mostDifficultArray, mostDifficultShuffledArray, 5, 9, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(mostDifficultShuffledArray);
+            })
+          })
+        }]
+      }
+
+      // Shub-Niggurath decks
+      if (ancientCard.classList.contains('item4')) {
+        const selectShubNiggurathLevel = [{
+          level1: veryEasyDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 1, brown: 2, blue: 1 },
+              { green: 3, brown: 2, blue: 1 },
+              { green: 2, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const easyNormalArray = [...easyArray, ...normalArray];
+            let easyShuffledArray = [];
+
+            fillArray(easyNormalArray, easyShuffledArray, 6, 8, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(easyShuffledArray);
+            })
+          }),
+          level2: easyDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 1, brown: 2, blue: 1 },
+              { green: 3, brown: 2, blue: 1 },
+              { green: 2, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const easyNormalArray = [...easyArray, ...normalArray];
+            let easyShuffledArray = [];
+
+            fillArray(easyNormalArray, easyShuffledArray, 6, 8, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(easyShuffledArray);
+            })
+          }),
+          level3: mediumDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 1, brown: 2, blue: 1 },
+              { green: 3, brown: 2, blue: 1 },
+              { green: 2, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const mediumArray = [...easyArray, ...normalArray, ...hardArray];
+            let mediumShuffledArray = [];
+
+            fillArray(mediumArray, mediumShuffledArray, 6, 8, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(mediumShuffledArray);
+            })
+          }),
+          level4: difficultDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 1, brown: 2, blue: 1 },
+              { green: 3, brown: 2, blue: 1 },
+              { green: 2, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const difficultArray = [...hardArray, ...normalArray];
+            let difficultShuffledArray = [];
+
+            fillArray(difficultArray, difficultShuffledArray, 6, 8, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(difficultShuffledArray);
+            })
+          }),
+          level5: hardDifficulty.addEventListener('click', () => {
+            currentState.classList.remove('hidden');
+            backCard.classList.remove('hidden');
+            lastCard.classList.remove('hidden');
+            const stages = [
+              { green: 1, brown: 2, blue: 1 },
+              { green: 3, brown: 2, blue: 1 },
+              { green: 2, brown: 4, blue: 0 }
+            ];
+            (function fillCounter() {
+              for (let i = 0; i < 1; i++) {
+                greenCount1.textContent = stages[i].green;
+                brownCount1.textContent = stages[i].brown;
+                blueCount1.textContent = stages[i].blue;
+              }
+
+              for (let i = 1; i < 2; i++) {
+                greenCount2.textContent = stages[i].green;
+                brownCount2.textContent = stages[i].brown;
+                blueCount2.textContent = stages[i].blue;
+              }
+
+              for (let i = 2; i < 3; i++) {
+                greenCount3.textContent = stages[i].green;
+                brownCount3.textContent = stages[i].brown;
+                blueCount3.textContent = stages[i].blue;
+              }
+            })();
+
+            const mostDifficultArray = [...hardArray, ...normalArray];
+            let mostDifficultShuffledArray = [];
+
+            fillArray(mostDifficultArray, mostDifficultShuffledArray, 6, 8, 2, 16);
+
+            backCard.addEventListener('click', () => {
+              drawCard(mostDifficultShuffledArray);
+            })
+          })
+        }]
       }
     });
+  });
+}
 
-    shuffle(easyShuffledArray);
-    console.log(easyShuffledArray)
-  })();
-
-  backCard.addEventListener('click', () => {
-
-    function drawCard() {
-
-      if (easyShuffledArray.length > 0) {
-
-        const card = easyShuffledArray.pop();
-        console.log(easyShuffledArray);
-        lastCard.style.background = ``;
-
-        let cardface = card.cardFace;
-        lastCard.style.background = `url(${cardface})`;
-
-        if (greenCount1.textContent > 0 && cardface.includes(`green`)) {
-          greenCount1.textContent--;
-        } else if (greenCount2.textContent > 0 && cardface.includes(`green`)) {
-          greenCount2.textContent--;
-        } else if (greenCount3.textContent > 0 && cardface.includes(`green`)) {
-          greenCount3.textContent--;
-        } else if (brownCount1.textContent > 0 && cardface.includes(`brown`)) {
-          brownCount1.textContent--;
-        } else if (brownCount2.textContent > 0 && cardface.includes(`brown`)) {
-          brownCount2.textContent--;
-        } else if (brownCount3.textContent > 0 && cardface.includes(`brown`)) {
-          brownCount3.textContent--;
-        } else if (blueCount1.textContent > 0 && cardface.includes(`blue`)) {
-          blueCount1.textContent--;
-        } else if (blueCount2.textContent > 0 && cardface.includes(`blue`)) {
-          blueCount2.textContent--;
-        } else if (blueCount3.textContent > 0 && cardface.includes(`blue`)) {
-          blueCount3.textContent--;
-        }
-      } else {
-        lastCard.style.background = `red`;
-        return;
-      }
-    };
-    drawCard();
-  })
-});
+selectAncient();

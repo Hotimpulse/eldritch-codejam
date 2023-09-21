@@ -95,4 +95,4 @@ Pick one Ancient and medium level difficulty to focus on the task with a static 
 Then progress by implementing various levels / additional Ancient cards.
 
 ## Who came up with this?
-This task was created by [Luffi2539](https://github.com/Luffi2539) as part of one of the RS-School courses. All credit goes to Luffi and the RS-School organization.
+This task was created by [Luffi2539](https://github.com/Luffi2539) as a part of one of the RS-School courses. All credit goes to Luffi and the RS-School organization.
