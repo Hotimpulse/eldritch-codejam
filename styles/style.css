@@ -77,6 +77,12 @@ body {
     display: flex;
   }
 }
+@media (width < 768px) {
+  .ancient-card-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 .ancient-card {
   display: flex;
@@ -96,6 +102,12 @@ body {
   .ancient-card {
     width: 200px;
     height: 280px;
+  }
+}
+@media (width < 768px) {
+  .ancient-card {
+    width: 100px;
+    height: 140px;
   }
 }
 
@@ -125,6 +137,11 @@ body {
     align-items: center;
     padding: 1rem;
     margin: 0 auto;
+  }
+}
+@media (width < 768px) {
+  .level-container {
+    flex-direction: column;
   }
 }
 
@@ -179,6 +196,16 @@ body {
     font-size: 1rem;
   }
 }
+@media (width < 768px) {
+  .very-easy,
+  .easy,
+  .medium,
+  .difficult,
+  .hard {
+    width: min(100% - 0rem, 110px);
+    height: 40px;
+  }
+}
 
 /* generate deck */
 .deck-container {
@@ -207,8 +234,6 @@ body {
 .deck,
 .last-card {
   display: flex;
-  justify-content: center;
-  align-items: center;
   width: 260px;
   height: 340px;
   margin: 0 auto;
@@ -224,6 +249,13 @@ body {
     height: 320px;
   }
 }
+@media (width < 768px) {
+  .deck,
+  .last-card {
+    width: 100px;
+    height: 160px;
+  }
+}
 
 .last-card {
   z-index: 1;
@@ -233,6 +265,11 @@ body {
 @media (width < 1200px) {
   .last-card {
     transform: translateX(-220px);
+  }
+}
+@media (width < 768px) {
+  .last-card {
+    transform: translateX(-120px);
   }
 }
 
