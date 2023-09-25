@@ -2,6 +2,9 @@ const backCard = document.querySelector('.deck');
 const currentState = document.querySelector('.current-state');
 const lastCard = document.querySelector('.last-card');
 const reload = document.querySelector('.refresh');
+const levelContainer = document.querySelector('.level-container');
+const deckContainer = document.querySelector('.deck-container');
+const mainWrapper = document.querySelector('.wrapper');
 
 //generate deck
 let randomNum;
@@ -445,6 +448,7 @@ function fillArray(arrayMain, newFilledArray, maxGreenCount, maxBrownCount, maxB
 
 // the following function goes through all the cards in a deck, displays them and updates the counter
 function drawCard(newFilledArray) {
+  lastCard.style.transform = `translateX(0px)`;
 
   if (newFilledArray.length > 0) {
 
@@ -488,9 +492,9 @@ function drawCard(newFilledArray) {
 // selecting 5 levels of difficulty logic for each Ancient
 function selectAncient() {
   const ancientCards = document.querySelectorAll('.ancient-card');
-
   ancientCards.forEach((ancientCard) => {
     ancientCard.addEventListener('click', () => {
+      levelContainer.style.display = `flex`;
       ancientCards.forEach((card) => {
         card.classList.remove("active");
       });
@@ -512,6 +516,7 @@ function selectAncient() {
       if (ancientCard.classList.contains('item1')) {
         const selectAzathothLevel = [{
           level1: veryEasyDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -550,6 +555,7 @@ function selectAncient() {
             })
           }),
           level2: easyDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -588,6 +594,7 @@ function selectAncient() {
             })
           }),
           level3: mediumDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -626,6 +633,7 @@ function selectAncient() {
             })
           }),
           level4: difficultDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -664,6 +672,7 @@ function selectAncient() {
             })
           }),
           level5: hardDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -707,6 +716,7 @@ function selectAncient() {
       if (ancientCard.classList.contains('item2')) {
         const selectCtulhuLevel = [{
           level1: veryEasyDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -745,6 +755,7 @@ function selectAncient() {
             })
           }),
           level2: easyDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -783,6 +794,7 @@ function selectAncient() {
             })
           }),
           level3: mediumDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -821,6 +833,7 @@ function selectAncient() {
             })
           }),
           level4: difficultDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -859,6 +872,7 @@ function selectAncient() {
             })
           }),
           level5: hardDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -903,6 +917,7 @@ function selectAncient() {
       if (ancientCard.classList.contains('item3')) {
         const selectYogSothothLevel = [{
           level1: veryEasyDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -941,6 +956,7 @@ function selectAncient() {
             })
           }),
           level2: easyDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -979,6 +995,7 @@ function selectAncient() {
             })
           }),
           level3: mediumDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -1017,6 +1034,7 @@ function selectAncient() {
             })
           }),
           level4: difficultDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -1055,6 +1073,7 @@ function selectAncient() {
             })
           }),
           level5: hardDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -1099,6 +1118,7 @@ function selectAncient() {
       if (ancientCard.classList.contains('item4')) {
         const selectShubNiggurathLevel = [{
           level1: veryEasyDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -1137,6 +1157,7 @@ function selectAncient() {
             })
           }),
           level2: easyDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -1175,6 +1196,7 @@ function selectAncient() {
             })
           }),
           level3: mediumDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -1213,6 +1235,7 @@ function selectAncient() {
             })
           }),
           level4: difficultDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');
@@ -1251,6 +1274,7 @@ function selectAncient() {
             })
           }),
           level5: hardDifficulty.addEventListener('click', () => {
+            deckContainer.style.display = `flex`;
             currentState.classList.remove('hidden');
             backCard.classList.remove('hidden');
             lastCard.classList.remove('hidden');

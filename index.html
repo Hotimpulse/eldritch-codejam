@@ -4,45 +4,36 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
 
     <title>Eldritch Horror</title>
   </head>
   <body>
     <div class="wrapper">
-
-      <div class="ancients-container">
-        <div class="ancients-wrapper">
-          <p class="card-headline" style="text-align: center; color: red">
-            Ancient cards picker
-          </p>
-          <div class="ancients-wrapper1">
-            <div
-              class="ancient-card item1"
-              style="background-image: url('./assets/Ancients/Azathoth.png')"
-            ></div>
-            <div
-              class="ancient-card item2"
-              style="background-image: url('./assets/Ancients/Cthulthu.png')"
-            ></div>
-            <div
-              class="ancient-card item3"
-              style="background-image: url('./assets/Ancients/IogSothoth.png')"
-            ></div>
-            <div
-              class="ancient-card item4"
-              style="
-                background-image: url('./assets/Ancients/ShubNiggurath.png');
-              "
-            ></div>
-          </div>
+      <div class="ancients-column">
+        <p class="card-headline">Ancient cards picker</p>
+        <div class="ancient-card-wrapper">
+          <div
+            class="ancient-card item1"
+            style="background-image: url('./assets/Ancients/Azathoth.png')"
+          ></div>
+          <div
+            class="ancient-card item2"
+            style="background-image: url('./assets/Ancients/Cthulthu.png')"
+          ></div>
+          <div
+            class="ancient-card item3"
+            style="background-image: url('./assets/Ancients/IogSothoth.png')"
+          ></div>
+          <div
+            class="ancient-card item4"
+            style="background-image: url('./assets/Ancients/ShubNiggurath.png')"
+          ></div>
         </div>
       </div>
 
       <div class="level-container">
-        <p class="card-headline" style="text-align: center; color: red">
-          Pick a difficulty level
-        </p>
+        <p class="card-headline">Pick a difficulty level</p>
         <button class="very-easy hidden">Very Easy</button>
         <button class="easy hidden">Easy</button>
         <button class="medium hidden">Medium</button>
@@ -51,10 +42,7 @@
       </div>
 
       <div class="deck-container">
-        <p class="card-headline" style="text-align: center; color: red">
-          Draw your cards
-        </p>
-        <button class="refresh">Restart</button>
+        <p class="card-headline">Draw your cards</p>
 
         <div class="current-state hidden">
           <div class="stage-container">
@@ -84,12 +72,13 @@
           <div class="deck-wrapper">
             <div
               class="deck hidden"
-              style="background-image: url('./assets/mythicCardBackground.png')"></div>
+              style="background-image: url('./assets/mythicCardBackground.png')"
+            ></div>
             <div class="last-card hidden"></div>
           </div>
         </div>
+        <button class="refresh">Restart</button>
       </div>
-
     </div>
     <script src="./index.js" type="module"></script>
   </body>
