@@ -75,7 +75,7 @@ We repeat the same steps for each stage
 We stack the decks that we get so that we get the 1st stage cards first, followed by the 2nd and 3rd stages respectively.
 
 
-Here's the link to a [demo of the app]()
+Here's the link to a [demo of the app](https://hotimpulse.github.io/eldritch-codejam/)
 
 ## Working files
 Main branch contains 2 folders called assets and data, which contain images of the cards and data you will need to complete this task yourself.
